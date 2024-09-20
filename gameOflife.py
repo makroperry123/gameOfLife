@@ -1,8 +1,20 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import animation
+from IPython.display import clear_output
 
 
-testGrid = [[0,0,0,1],
-            [1,1,1,0],
-            [0,0,1,0]]
+testGrid = [[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1]]
 
 rows = len(testGrid)
 cols=  len(testGrid[0])
@@ -12,11 +24,18 @@ cols=  len(testGrid[0])
 # Each cell with three neighbors becomes populated.
 
 def gameOfLife(testGrid, gen):
+    fig, ax = plt.subplots()
+
+
     rows = len(testGrid)
     cols = len(testGrid[0])
     emptyGrid = [[None for _ in range(cols)] for _ in range(rows)]
     secondGen = [[None for _ in range(cols)] for _ in range(rows)]
     for b in range(gen):
+        clear_output(wait=True)
+        mat = ax.matshow(testGrid, cmap='gray')
+        mat.set_array(testGrid)
+        plt.pause(1)
         for i in range(rows):
             for j in range(cols):
                 check = 0
@@ -85,4 +104,6 @@ def gameOfLife(testGrid, gen):
             print(o)
         testGrid = secondGen
 
+
 gameOfLife(testGrid,7)
+
